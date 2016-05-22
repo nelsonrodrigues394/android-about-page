@@ -172,8 +172,34 @@ public class AboutPage {
     }
 
     /*
+        Add Linkedin Element
+     */
+
+    public AboutPage addLinkedin(String id) {
+        Element linkedinElement = new Element();
+        linkedinElement.setTitle(mContext.getString(R.string.about_linkedin));
+        linkedinElement.setIcon(R.drawable.about_icon_linkedin);
+        linkedinElement.setColor(ContextCompat.getColor(mContext, R.color.about_linkedin_color));
+        linkedinElement.setValue(id);
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(String.format("https://www.linkedin.com/company/%s", id)));
+
+        if (AboutPageUtils.isAppInstalled(mContext, "com.linkedin.android")) {
+            intent.setPackage("com.linkedin.android");
+        }
+
+        linkedinElement.setIntent(intent);
+        addItem(linkedinElement);
+
+        return this;
+    }
+
+    /*
         Add Instagram Element
      */
+
     public AboutPage addInstagram(String id) {
         Element instagramElement = new Element();
         instagramElement.setTitle(mContext.getString(R.string.about_instagram));
